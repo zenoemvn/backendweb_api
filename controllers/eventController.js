@@ -33,6 +33,11 @@ exports.getEvents = async (req, res) => {
 exports.createEvent = async (req, res) => {
     const { event_name } = req.body;
 
+    // Validation checks
+    if (!event_name) {
+        return res.status(400).json({ message: 'Event name is required' });
+    }
+
     try {
         await pool.query('INSERT INTO track_events (event_name) VALUES (?)', [event_name]);
         res.status(201).json({ message: 'Event created successfully' });

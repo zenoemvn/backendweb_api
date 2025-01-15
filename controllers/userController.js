@@ -34,6 +34,16 @@ exports.getUsers = async (req, res) => {
 exports.createUser = async (req, res) => {
     const { name, email, password } = req.body;
 
+    // Validation checks
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Name should not contain numbers
+    if (/\d/.test(name)) {
+        return res.status(400).json({ message: 'Name cannot contain numbers' });
+    }
+
     try {
         await pool.query('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, password]);
         res.status(201).json({ message: 'User created successfully' });
@@ -47,17 +57,27 @@ exports.updateUser = async (req, res) => {
     const { id } = req.params;
     const { name, email, password } = req.body;
 
+    // Validation checks
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Name should not contain numbers
+    if (/\d/.test(name)) {
+        return res.status(400).json({ message: 'Name cannot contain numbers' });
+    }
+
     try {
         await pool.query(
             'UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?',
             [name, email, password, id]
         );
-
         res.json({ message: 'User updated successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
 
 // Delete an Existing User
 exports.deleteUser = async (req, res) => {
