@@ -19,15 +19,19 @@ exports.getEventById = async (req, res) => {
 
 // Get All Events
 exports.getEvents = async (req, res) => {
-    const search = req.query.search || '';
+    const search = req.query.search || ''; // Search for a keyword in the event_name field
 
     try {
-        const [events] = await pool.query('SELECT * FROM track_events');
+        const [events] = await pool.query(
+            'SELECT * FROM user_track_events WHERE track_event_id LIKE ?',
+            [`%${search}%`] // Use the search query to filter results
+        );
         res.json(events);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
+
 
 // Create a New Event
 exports.createEvent = async (req, res) => {
