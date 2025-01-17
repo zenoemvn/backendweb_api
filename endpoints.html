@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Endpoints</title>
+</head>
+<body>
+    <h1>API Endpoints</h1>
+    <p>Below is a list of all the available API endpoints for this project:</p>
+
+    <h2>Users Endpoints</h2>
+    <ul>
+        <li><strong>GET</strong> /api/users - Retrieve all users</li>
+        <li><strong>GET</strong> /api/users/:id - Retrieve a single user by ID</li>
+        <li><strong>POST</strong> /api/users - Create a new user :
+            {
+            "name": "John Doe",
+            "email": "johndoe@example.com",
+            "password": "password123"
+        }
+        </li>
+        <li><strong>PUT</strong> /api/users/:id - Update an existing user</li>
+        <li><strong>DELETE</strong> /api/users/:id - Delete a user</li>
+    </ul>
+
+    <h2>Track Events Endpoints</h2>
+    <ul>
+        <li><strong>GET</strong> /api/events - Retrieve all track events</li>
+        <li><strong>GET</strong> /api/events/:id - Retrieve a single track event by ID</li>
+        <li><strong>POST</strong> /api/events - Create a new track event</li>
+        <li><strong>PUT</strong> /api/events/:id - Update an existing track event</li>
+        <li><strong>DELETE</strong> /api/events/:id - Delete a track event</li>
+    </ul>
+</body>
+</html>
